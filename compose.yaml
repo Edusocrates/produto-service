@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  produto-db:
+    image: postgres:16
+    container_name: produto-db
+    environment:
+      POSTGRES_DB: produto_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - produto_data:/var/lib/postgresql/data
+
+  produto-service:
+    build: .
+    container_name: produto-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - produto-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://produto-db:5432/produto_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    restart: on-failure
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"       # Porta padrão para comunicação
+      - "15672:15672"     # UI Web
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+volumes:
+  produto_data:
