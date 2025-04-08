@@ -13,6 +13,6 @@ public class ProdutoMessagePublisher {
     private final RabbitTemplate rabbitTemplate;
 
     public void enviarMensagem(Object payload) {
-        rabbitTemplate.convertAndSend(PRODUTO_EXCHANGE, PRODUTO_ROUTING_KEY, payload);
+        rabbitTemplate.convertAndSend(PRODUTO_CRIADO_EXCHANGE, PRODUTO_CRIADO_ROUTING_KEY, payload);
     }
 }

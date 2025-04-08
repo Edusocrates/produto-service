@@ -10,7 +10,7 @@ import static com.fiap.rm358568.edusocrates.produto_service.infraestrutura.confi
 @Component
 public class ProdutoMessageListener {
 
-    @RabbitListener(queues = PRODUTO_QUEUE)
+    @RabbitListener(queues = PRODUTO_CRIADO_QUEUE)
     public void receberMensagem(String mensagem) {
         log.info("📥 ProdutoService recebeu mensagem: {}", mensagem);
     }
