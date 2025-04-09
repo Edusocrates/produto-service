@@ -17,4 +17,6 @@ public interface ProdutoGateway {
     void deletarPorId(UUID id);
 
     boolean existePorId(UUID id);
+
+    void processarVendaProduto(String produtoId, Integer quantidade);
 }

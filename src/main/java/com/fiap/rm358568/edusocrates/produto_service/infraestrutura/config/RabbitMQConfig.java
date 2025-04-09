@@ -78,4 +78,9 @@ public class RabbitMQConfig {
                 .to(pedidoProdutoSyncExchange())
                 .with(PEDIDO_PRODUTO_SYNC_ROUTING_KEY);
     }
+
+    @Bean
+    public Queue pedidoSyncProdutoQueue() {
+        return new Queue("pedido-produto-sync-queue", true);
+    }
 }

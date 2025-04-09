@@ -1,14 +1,12 @@
 package com.fiap.rm358568.edusocrates.produto_service.dominio.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
 @Getter
+@Setter
 @EqualsAndHashCode(of = "id")
 @Builder
 public class Produto {
