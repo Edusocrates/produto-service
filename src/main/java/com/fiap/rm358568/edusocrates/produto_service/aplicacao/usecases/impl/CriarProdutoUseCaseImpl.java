@@ -6,6 +6,7 @@ import com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.CriarPro
 import com.fiap.rm358568.edusocrates.produto_service.dominio.entities.Produto;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.gateway.ProdutoGateway;
 import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging.ProdutoMessagePublisher;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
+@Transactional
 public class CriarProdutoUseCaseImpl implements CriarProdutoUseCase {
 
     private final ProdutoGateway produtoGateway;
@@ -33,6 +35,8 @@ public class CriarProdutoUseCaseImpl implements CriarProdutoUseCase {
                 .descricao(request.descricao())
                 .preco(request.preco())
                 .quantidadeEstoque(request.quantidadeEmEstoque())
+                .status(request.status())
+                .categoria(request.categoria())
                 .build();
 
         log.info("Enviando produto para o gateway: {}", produto.getNome());

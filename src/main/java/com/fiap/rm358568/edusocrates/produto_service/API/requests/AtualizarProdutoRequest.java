@@ -20,6 +20,10 @@ public record AtualizarProdutoRequest(
         Integer quantidadeEmEstoque,
 
         @NotBlank(message = "Descrição é obrigatória")
-        String descricao
+        String descricao,
+
+        String status,
+
+        String categoria
 
 ) {}

@@ -3,11 +3,13 @@ package com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.impl;
 import com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.ConfirmarCriacaoProdutoNoEstoqueUseCase;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.gateway.ProdutoGateway;
 import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging.event.ProdutoCriadoEvent;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@Transactional
 public class ConfirmarCriacaoProdutoNoEstoqueUseCaseImpl implements ConfirmarCriacaoProdutoNoEstoqueUseCase {
 
     private final ProdutoGateway produtoGateway;

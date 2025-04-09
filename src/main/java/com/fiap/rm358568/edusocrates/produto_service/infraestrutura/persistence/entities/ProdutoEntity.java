@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -25,7 +26,14 @@ public class ProdutoEntity {
 
     private BigDecimal preco;
 
+    private String categoria;
+
     private Integer quantidadeEstoque;
+
+    private String status;
+
+    @Column(name = "criado_em", updatable = false)
+    private LocalDateTime criadoEm;
 
     public static ProdutoEntity fromDomain(Produto produto) {
         return ProdutoEntity.builder()
@@ -33,11 +41,26 @@ public class ProdutoEntity {
                 .nome(produto.getNome())
                 .descricao(produto.getDescricao())
                 .preco(produto.getPreco())
+                .categoria(produto.getCategoria())
                 .quantidadeEstoque(produto.getQuantidadeEstoque())
+                .status(produto.getStatus())
+                .criadoEm(LocalDateTime.now())
+                .build();
+    }
+
+    public static ProdutoEntity novoProdutoDomain(Produto produto) {
+        return ProdutoEntity.builder()
+                .nome(produto.getNome())
+                .descricao(produto.getDescricao())
+                .preco(produto.getPreco())
+                .categoria(produto.getCategoria())
+                .quantidadeEstoque(produto.getQuantidadeEstoque())
+                .status(produto.getStatus())
+                .criadoEm(LocalDateTime.now())
                 .build();
     }
 
     public Produto toDomain() {
-        return new Produto(id, nome, descricao, preco, quantidadeEstoque);
+        return new Produto(id, nome, descricao, preco, categoria, quantidadeEstoque, status, criadoEm);
     }
 }

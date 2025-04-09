@@ -1,9 +1,12 @@
 package com.fiap.rm358568.edusocrates.produto_service.infraestrutura.persistence.adapters;
 
+import com.fiap.rm358568.edusocrates.produto_service.API.exceptions.ProdutoNaoEncontradoException;
+import com.fiap.rm358568.edusocrates.produto_service.API.exceptions.QuantidadeEstoqueException;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.gateway.ProdutoGateway;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.entities.Produto;
 import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.persistence.entities.ProdutoEntity;
 import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.persistence.repositories.ProdutoJpaRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +26,9 @@ public class ProdutoRepositoryAdapter implements ProdutoGateway {
     }
 
     @Override
+    @Transactional
     public Produto salvar(Produto produto) {
-        ProdutoEntity entity = ProdutoEntity.fromDomain(produto);
+        ProdutoEntity entity = ProdutoEntity.novoProdutoDomain(produto);
         return repository.save(entity).toDomain();
     }
 
@@ -51,17 +55,18 @@ public class ProdutoRepositoryAdapter implements ProdutoGateway {
     }
 
     @Override
+    @Transactional
     public void processarVendaProduto(String produtoId, Integer quantidade) {
         log.info("Processando venda do produto com ID: {} e quantidade: {}", produtoId, quantidade);
 
         ProdutoEntity produtoEntity = repository.findById(UUID.fromString(produtoId))
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
 
         Produto produto = produtoEntity.toDomain();
 
         log.info("Produto encontrado: {}. Estoque atual: {}", produto.getNome(), produto.getQuantidadeEstoque());
         if (produto.getQuantidadeEstoque() < quantidade) {
-            throw new RuntimeException("Quantidade em estoque insuficiente!");
+            throw new QuantidadeEstoqueException("Quantidade em estoque insuficiente!");
         } else {
             produto.setQuantidadeEstoque(produto.getQuantidadeEstoque() - quantidade);
             ProdutoEntity atualizadoEntity = ProdutoEntity.fromDomain(produto);
@@ -71,10 +76,11 @@ public class ProdutoRepositoryAdapter implements ProdutoGateway {
     }
 
     @Override
+    @Transactional
     public void atualizarEstoque(UUID id, Integer integer) {
         log.info("Atualizando estoque do produto com ID: {} para quantidade: {}", id, integer);
         ProdutoEntity produtoEntity = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
         Produto produto = produtoEntity.toDomain();
         produto.setQuantidadeEstoque(integer);
         ProdutoEntity atualizadoEntity = ProdutoEntity.fromDomain(produto);

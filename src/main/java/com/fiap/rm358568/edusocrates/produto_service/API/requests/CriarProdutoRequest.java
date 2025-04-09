@@ -19,6 +19,12 @@ public record CriarProdutoRequest(
         Integer quantidadeEmEstoque,
 
         @NotBlank(message = "Descrição é obrigatória")
-        String descricao
+        String descricao,
+
+        @NotBlank(message = "Status é obrigatório")
+        String status,
+
+        @NotBlank(message = "Categoria é obrigatória")
+        String categoria
 
 ) {}

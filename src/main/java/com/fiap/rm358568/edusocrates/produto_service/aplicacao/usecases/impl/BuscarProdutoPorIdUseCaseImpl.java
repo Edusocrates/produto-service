@@ -1,5 +1,6 @@
 package com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.impl;
 
+import com.fiap.rm358568.edusocrates.produto_service.API.exceptions.ProdutoNaoEncontradoException;
 import com.fiap.rm358568.edusocrates.produto_service.API.responses.ProdutoResponse;
 import com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.BuscarProdutoPorIdUseCase;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.entities.Produto;
@@ -24,7 +25,7 @@ public class BuscarProdutoPorIdUseCaseImpl implements BuscarProdutoPorIdUseCase 
         log.info("Buscando produto com ID: {}", id);
 
         Produto produto = produtoGateway.buscarPorId(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("Produto não encontrado!"));
 
         return new ProdutoResponse(
                 produto.getId(),
