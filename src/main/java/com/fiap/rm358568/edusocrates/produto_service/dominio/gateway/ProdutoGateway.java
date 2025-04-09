@@ -19,4 +19,6 @@ public interface ProdutoGateway {
     boolean existePorId(UUID id);
 
     void processarVendaProduto(String produtoId, Integer quantidade);
+
+    void atualizarEstoque(UUID id, Integer integer);
 }

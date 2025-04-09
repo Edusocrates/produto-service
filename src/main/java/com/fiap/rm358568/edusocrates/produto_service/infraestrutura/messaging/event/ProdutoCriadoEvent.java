@@ -10,5 +10,5 @@ public record ProdutoCriadoEvent(
         UUID id,
         String nome,
         BigDecimal preco,
-        String unidadeMedida
+        Integer quantidadeEstoque
 ) {}

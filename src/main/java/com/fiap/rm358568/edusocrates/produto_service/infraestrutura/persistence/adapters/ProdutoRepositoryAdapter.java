@@ -69,4 +69,15 @@ public class ProdutoRepositoryAdapter implements ProdutoGateway {
             log.info("Venda processada com sucesso! Produto ID: {}. Estoque restante: {}", produtoId, produto.getQuantidadeEstoque());
         }
     }
+
+    @Override
+    public void atualizarEstoque(UUID id, Integer integer) {
+        log.info("Atualizando estoque do produto com ID: {} para quantidade: {}", id, integer);
+        ProdutoEntity produtoEntity = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
+        Produto produto = produtoEntity.toDomain();
+        produto.setQuantidadeEstoque(integer);
+        ProdutoEntity atualizadoEntity = ProdutoEntity.fromDomain(produto);
+        repository.save(atualizadoEntity);
+    }
 }
