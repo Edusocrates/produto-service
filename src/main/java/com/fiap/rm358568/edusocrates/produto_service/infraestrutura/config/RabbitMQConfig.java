@@ -22,6 +22,10 @@ public class RabbitMQConfig {
     public static final String PEDIDO_PRODUTO_SYNC_EXCHANGE = "pedido.produto.sync.exchange";
     public static final String PEDIDO_PRODUTO_SYNC_ROUTING_KEY = "pedido.produto.sync";
 
+    // Fila e Exchange para estoque <-> produto (sincronização)
+    public static final String ESTOQUE_PRODUTO_SYNC_QUEUE = "estoque.produto.criado";
+
+
     // === PRODUTO CRIADO ===
     @Bean
     public Queue produtoCriadoQueue() {
@@ -82,5 +86,10 @@ public class RabbitMQConfig {
     @Bean
     public Queue pedidoSyncProdutoQueue() {
         return new Queue("pedido-produto-sync-queue", true);
+    }
+
+    @Bean
+    public Queue estoqueProdutoSyncQueue() {
+        return new Queue(ESTOQUE_PRODUTO_SYNC_QUEUE);
     }
 }
