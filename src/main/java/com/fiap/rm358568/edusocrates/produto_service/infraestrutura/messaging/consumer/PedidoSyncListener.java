@@ -23,6 +23,9 @@ public class PedidoSyncListener {
     @RabbitListener(queues = "pedido-produto-sync-queue")
     public void listen(PedidoProdutoSyncEvent event) {
         log.info("Recebido evento de pedido: {}", event);
+        if (event.getItens() == null || event.getItens().isEmpty()) {
+            return;
+        }
         Map<String, Integer> produtosQuantidade = new HashMap<>();
 
         event.getItens().forEach(item -> produtosQuantidade.put(item.getProdutoId(), item.getQuantidade()));

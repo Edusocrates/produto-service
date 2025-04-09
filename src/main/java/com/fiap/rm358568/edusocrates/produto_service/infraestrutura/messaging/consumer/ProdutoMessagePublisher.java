@@ -1,4 +1,4 @@
-package com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging;
+package com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging.consumer;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

@@ -18,6 +18,9 @@ public class PrecoAtualizadoListener {
     @RabbitListener(queues = RabbitMQConfig.PRECO_ATUALIZADO_QUEUE)
     public void ouvirPrecoAtualizado(PrecoAtualizadoEvent event) {
         log.info("Recebido evento de atualização de preço: {}", event);
+        if (event == null) {
+            return;
+        }
         atualizarPrecoUseCase.atualizarPreco(event.produtoId(), event.novoPreco());
     }
 }

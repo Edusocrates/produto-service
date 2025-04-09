@@ -5,7 +5,7 @@ import com.fiap.rm358568.edusocrates.produto_service.API.responses.ProdutoRespon
 import com.fiap.rm358568.edusocrates.produto_service.aplicacao.usecases.CriarProdutoUseCase;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.entities.Produto;
 import com.fiap.rm358568.edusocrates.produto_service.dominio.gateway.ProdutoGateway;
-import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging.ProdutoMessagePublisher;
+import com.fiap.rm358568.edusocrates.produto_service.infraestrutura.messaging.consumer.ProdutoMessagePublisher;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

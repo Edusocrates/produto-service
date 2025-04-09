@@ -136,9 +136,12 @@
 							<excludes>
 								<exclude>com/fiap/rm358568/edusocrates/produto_service/infraestrutura/adapters/**</exclude>
 								<exclude>com/fiap/rm358568/edusocrates/produto_service/API/requests/**</exclude>
+								<exclude>com/fiap/rm358568/edusocrates/produto_service/API/responses/**</exclude>
 								<exclude>com/fiap/rm358568/edusocrates/produto_service/infraestrutura/config/**</exclude>
+								<exclude>com/fiap/rm358568/edusocrates/produto_service/infraestrutura/messaging/event/**</exclude>
+								<exclude>com/fiap/rm358568/edusocrates/produto_service/infraestrutura/persistence/**</exclude>
 								<exclude>com/fiap/rm358568/edusocrates/produto_service/API/exceptions/**</exclude>
-								<exclude>com/fiap/rm358568/edusocrates/produto_service/dominio/entities/**</exclude>
+								<exclude>com/fiap/rm358568/edusocrates/produto_service/dominio/**</exclude>
 							</excludes>
 						</configuration>
 					</execution>
